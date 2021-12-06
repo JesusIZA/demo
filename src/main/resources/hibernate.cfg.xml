@@ -7,7 +7,9 @@
         <property name="connection.password">demo_db_user</property>
         <property name="dialect">org.hibernate.dialect.PostgreSQL10Dialect</property>
         <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
 
         <mapping class="com.example.demo.model.User"/>
+        <mapping class="com.example.demo.model.Profile"/>
     </session-factory>
 </hibernate-configuration>
