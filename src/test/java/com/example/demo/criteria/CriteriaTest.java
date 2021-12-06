@@ -7,15 +7,15 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.function.Consumer;
 
 @SpringBootTest
-public class CriteriaTest {
-    private static SessionFactory factory = new Configuration().configure().buildSessionFactory();
+class CriteriaTest {
+    private SessionFactory factory = new Configuration().configure().buildSessionFactory();
 
     @Test
     void oldSelectRestrictions() {
@@ -149,15 +149,15 @@ public class CriteriaTest {
 
 
 
-    private static void wrapWitSession(Consumer<Session> lambda) {
+    private void wrapWitSession(Consumer<Session> lambda) {
         try (Session session = factory.openSession()) {
             session.beginTransaction();
             lambda.accept(session);
         }
     }
 
-    @BeforeAll
-    static void fillData() {
+    @BeforeEach
+    void fillData() {
         wrapWitSession(session -> {
             session.createNativeQuery("" +
                     "delete from users;\n" +
